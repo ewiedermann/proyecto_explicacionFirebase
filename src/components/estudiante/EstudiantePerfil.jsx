@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TextInput, Button, Alert} from 'react-native';
-import {getEstudiante, updateEstudiante} from '../../services/studentService';
+import {
+  getEstudiante,
+  updateEstudiante,
+} from '../../services/EstudianteServicios';
 
-const EstudiantePerfil = ({route, navigation}) => {
+const EstudianteProfile = ({route, navigation}) => {
   const {estudianteId} = route.params; // ID del estudiante pasado a través de la navegación
   const [estudiante, setEstudiante] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,9 +18,9 @@ const EstudiantePerfil = ({route, navigation}) => {
   useEffect(() => {
     const fetchEstudiante = async () => {
       try {
-        const estudiannteDoc = await getEstudiante(estudianteId);
-        if (estudiannteDoc.exists) {
-          const data = estudiannteDoc.data();
+        const estudianteDoc = await getEstudiante(estudianteId);
+        if (estudianteDoc.exists) {
+          const data = estudianteDoc.data();
           setEstudiante(data);
           setName(data.name || '');
           setEmail(data.email || '');
@@ -90,4 +93,4 @@ const EstudiantePerfil = ({route, navigation}) => {
   );
 };
 
-export default EstudiantePerfil;
+export default EstudianteProfile;
